@@ -23,6 +23,9 @@
 #endif
 
 #include "gstqt6elements.h"
+#include <QtQml/QQmlApplicationEngine>
+
+#include "qt6glitem.h"
 
 static gboolean
 plugin_init (GstPlugin * plugin)
@@ -31,6 +34,10 @@ plugin_init (GstPlugin * plugin)
 
   ret |= GST_ELEMENT_REGISTER (qml6glsink, plugin);
 
+  if (ret) {
+      /* this means the plugin must be loaded before the qml engine is loaded */
+      qmlRegisterType<Qt6GLVideoItem> ("org.freedesktop.gstreamer.GLVideoItem", 1, 0, "GstGLVideoItem");
+  }
   return ret;
 }
 

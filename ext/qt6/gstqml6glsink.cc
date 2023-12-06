@@ -554,29 +554,15 @@ config_failed:
 
 static void
 gst_qml6_gl_sink_navigation_send_event (GstNavigation * navigation,
-                                   GstEvent * event)
+                                   GstStructure *structure)
 {
   GstQml6GLSink *qt_sink = GST_QML6_GL_SINK (navigation);
-  GstPad *pad;
-
-  pad = gst_pad_get_peer (GST_VIDEO_SINK_PAD (qt_sink));
-
   GST_TRACE_OBJECT (qt_sink, "navigation event %" GST_PTR_FORMAT,
-      gst_event_get_structure(event));
-
-  if (GST_IS_PAD (pad) && GST_IS_EVENT (event)) {
-    if (!gst_pad_send_event (pad, gst_event_ref (event))) {
-      /* If upstream didn't handle the event we'll post a message with it
-       * for the application in case it wants to do something with it */
-      gst_element_post_message (GST_ELEMENT_CAST (qt_sink),
-                                gst_navigation_message_new_event (GST_OBJECT_CAST (qt_sink), event));
-    }
-    gst_event_unref (event);
-    gst_object_unref (pad);
-  }
+      structure);
+  //TODO(Zdanek) this will be available from GST 1.22
 }
 
 static void gst_qml6_gl_sink_navigation_interface_init (GstNavigationInterface * iface)
 {
-  iface->send_event_simple = gst_qml6_gl_sink_navigation_send_event;
+  iface->send_event = gst_qml6_gl_sink_navigation_send_event;
 }
