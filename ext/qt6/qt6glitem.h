@@ -29,6 +29,7 @@
 #include <QtQuick/QQuickItem>
 #include <QtGui/QOpenGLContext>
 #include <QtGui/QOpenGLFunctions>
+#include <QtQuick/QQuickWindow>
 
 typedef struct _Qt6GLVideoItemPrivate Qt6GLVideoItemPrivate;
 
