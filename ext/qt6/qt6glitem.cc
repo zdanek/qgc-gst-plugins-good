@@ -543,6 +543,7 @@ Qt6GLVideoItem::onSceneGraphInitialized ()
 
   this->priv->qt_context = gl_context;
   if (this->priv->qt_context == NULL) {
+    GST_ERROR ("%p failed to retrieve Qt GL context", this);
     g_assert_not_reached ();
     return;
   }
