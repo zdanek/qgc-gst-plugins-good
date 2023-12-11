@@ -122,7 +122,9 @@ GstQSG6OpenGLNode::setBuffer (GstBuffer * buffer)
     /* FIXME: should really lock the memory to prevent write access */
     if (!gst_video_frame_map (&this->v_frame, &this->v_info, this->buffer_,
           (GstMapFlags) (GST_MAP_READ | GST_MAP_GL))) {
-      g_assert_not_reached ();
+      //g_assert_not_reached ();
+      // TODO(zdanek) - this happens when format of the video changes
+      GST_ERROR ("Failed to map video frame");
       goto use_dummy_tex;
     }
 
