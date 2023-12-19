@@ -26,7 +26,8 @@ G_BEGIN_DECLS
 
 void qt6_element_init (GstPlugin * plugin);
 
-GST_ELEMENT_REGISTER_DECLARE (qml6glsink);
+// GST_ELEMENT_REGISTER_DECLARE (qml6glsink);
+extern "C" { gboolean gst_element_register_qml6glsink (GstPlugin * plugin); };
 
 G_END_DECLS
 

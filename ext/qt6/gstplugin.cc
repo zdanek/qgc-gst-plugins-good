@@ -31,8 +31,8 @@ static gboolean
 plugin_init (GstPlugin * plugin)
 {
   gboolean ret = FALSE;
-
-  ret |= GST_ELEMENT_REGISTER (qml6glsink, plugin);
+// ret |= GST_ELEMENT_REGISTER (qml6glsink, plugin);
+  ret |= gst_element_register_qml6glsink (plugin);
 
   return ret;
 }
